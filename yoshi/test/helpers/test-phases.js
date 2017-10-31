@@ -4,6 +4,7 @@ const process = require('process');
 const path = require('path');
 const sh = require('shelljs');
 const spawn = require('cross-spawn');
+const stripAnsi = require('strip-ansi');
 const cwd = path.join(__dirname, '..', '..');
 
 class Test {
@@ -55,7 +56,12 @@ class Test {
     const options = Object.assign({}, {cwd: this.tmp, env, silent: false}, execOptions);
 
     if (this.hasTmp()) {
-      return sh.exec(`node '${this.script}' ${args}`, options);
+      const result = sh.exec(`node '${this.script}' ${args}`, options);
+
+      return Object.assign(result, {
+        stdout: stripAnsi(result.stdout),
+        stderr: stripAnsi(result.stderr)
+      });
     }
   }
 
