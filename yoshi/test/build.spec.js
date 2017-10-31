@@ -48,7 +48,7 @@ describe('Aggregator: Build', () => {
     });
   });
 
-  describe('with --analyze flag', () => {
+  describe.skip('with --analyze flag', () => {
     it('should serve webpack-bundle-analyzer server', () => {
       const analyzerServerPort = '8888';
       const analyzerContentPart = 'window.chartData = [{"label":"app.bundle.min.js"';
