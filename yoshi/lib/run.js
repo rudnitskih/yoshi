@@ -17,17 +17,18 @@ function pluginInstall(modules) {
     let cp;
     const yoshiDir = path.resolve(__dirname, '..');
     const pluginsDir = path.join(yoshiDir, 'plugins');
+    const stdio = inTeamCity() ? 'pipe' : 'inherit';
 
     if (usingYarn()) {
       mkdirp(pluginsDir);
-      cp = spawnSync('yarn', ['add', ...modules, '--no-lockfile', '--silent'], {shell: true, cwd: pluginsDir, stdio: 'inherit'});
+      cp = spawnSync('yarn', ['add', ...modules, '--no-lockfile'], {shell: true, cwd: pluginsDir, stdio});
     } else {
-      cp = spawnSync('npm', ['install', ...modules, '--prefix', pluginsDir, '--no-package-lock', '--no-save', '--silent'], {shell: true, stdio: ['inherit', 'pipe', 'inherit']});
+      cp = spawnSync('npm', ['install', ...modules, '--prefix', pluginsDir, '--no-package-lock', '--no-save'], {shell: true, stdio});
     }
 
     cp.status === 0 ?
       resolve() :
-      reject(cp.stderr.toString());
+      reject(cp.stderr !== null ? cp.stderr.toString() : '');
   });
 }
 
