@@ -1233,7 +1233,6 @@ describe('Aggregator: Build', () => {
     });
   });
 
-
   describe('symlinks', () => {
     it('should not resolve symlinks to their symlinked location', () => {
       const module1 = '.call(exports, "../node_modules/awesome-module1")';

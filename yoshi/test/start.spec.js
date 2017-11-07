@@ -25,6 +25,47 @@ describe('Aggregator: Start', () => {
       return killSpawnProcessAndHisChildren(child);
     });
 
+    it('should use yoshi-update-node-version', () => {
+      child = test
+        .setup({
+          'src/test.spec.js': '',
+          'src/client.js': '',
+          'entry.js': '',
+          'package.json': fx.packageJson(),
+          'pom.xml': fx.pom()
+        })
+        .spawn('start', [], outsideTeamCity);
+
+      return checkServerLogCreated().then(() =>
+        expect(test.contains('.nvmrc')).to.be.true
+      );
+    });
+
+    it(`should use yoshi-clean before building`, () => {
+      child = test
+        .setup({
+          'dist/src/old.js': `const hello = "world!";`,
+          'src/new.js': 'const world = "hello!";',
+          'package.json': fx.packageJson(),
+          '.babelrc': '{}'
+        })
+        .spawn('start');
+
+      return checkServerLogCreated().then(() => {
+        expect(test.stdout).to.contains(`Finished 'clean'`);
+        expect(test.list('dist')).to.not.include('old.js');
+        expect(test.list('dist/src')).to.include('new.js');
+      });
+    });
+
+    it('should run yoshi-check-deps', () => {
+      child = test
+        .setup({'src/client.js': '', 'package.json': fx.packageJson()})
+        .spawn('start');
+
+      return checkStdout('checkDeps');
+    });
+
     describe('tests', function () {
       it('should run tests initially', () => {
         child = test
@@ -386,39 +427,6 @@ describe('Aggregator: Start', () => {
           test.modify('src/someFile.js', ' ');
           return checkServerLogContains('onRestart', {backoff: 200});
         }
-      });
-    });
-
-    it('should use yoshi-update-node-version', () => {
-      child = test
-        .setup({
-          'src/test.spec.js': '',
-          'src/client.js': '',
-          'entry.js': '',
-          'package.json': fx.packageJson(),
-          'pom.xml': fx.pom()
-        })
-        .spawn('start', [], outsideTeamCity);
-
-      return checkServerLogCreated().then(() =>
-        expect(test.contains('.nvmrc')).to.be.true
-      );
-    });
-
-    it(`should use yoshi-clean before building`, () => {
-      child = test
-        .setup({
-          'dist/src/old.js': `const hello = "world!";`,
-          'src/new.js': 'const world = "hello!";',
-          'package.json': fx.packageJson(),
-          '.babelrc': '{}'
-        })
-        .spawn('start');
-
-      return checkServerLogCreated().then(() => {
-        expect(test.stdout).to.contains(`Finished 'clean'`);
-        expect(test.list('dist')).to.not.include('old.js');
-        expect(test.list('dist/src')).to.include('new.js');
       });
     });
 

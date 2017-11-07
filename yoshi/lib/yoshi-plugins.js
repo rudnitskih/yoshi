@@ -30,7 +30,7 @@ module.exports = options => ({
   lint: [[linter, 'yoshi-stylelint']],
   release: [['yoshi-wnpm-release']],
   start: [
-    ['yoshi-clean', 'yoshi-update-node-version', './tasks/migrate-to-scoped-packages'],
+    ['yoshi-clean', 'yoshi-update-node-version', './tasks/migrate-to-scoped-packages', 'yoshi-check-deps'],
     ['yoshi-sass', './tasks/less', 'yoshi-petri', 'yoshi-maven-statics', 'yoshi-copy', transpiler(), './tasks/webpack-dev-server']
   ],
   test: tests(options)
