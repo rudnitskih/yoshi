@@ -26,6 +26,10 @@ const runServer = ({entryPoint, manualRestart}) => {
   const serverScript = path.resolve(entryPoint);
 
   if (!fs.existsSync(serverScript)) {
+    const projectConfig = require('../../config/project');
+    port = projectConfig.servers.cdn.port();
+    console.log('');
+    gutil.log('Application is now available at ', gutil.colors.magenta(`http://localhost:${port}/`));
     mkdirp.sync(path.resolve('target'));
     writeToServerLog('no server');
     return Promise.resolve();
