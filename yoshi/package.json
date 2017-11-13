@@ -92,7 +92,21 @@
     "webpack-hot-middleware": "~2.18.2",
     "wix-tpa-style-loader": "~1.0.8",
     "yoshi-runtime": "~1.0.0",
-    "yoshi-utils": "~1.0.0"
+    "yoshi-utils": "~1.0.0",
+    "yoshi-babel": "latest",
+    "yoshi-check-deps": "~1.0.0",
+    "yoshi-clean": "latest",
+    "yoshi-copy": "latest",
+    "yoshi-eslint": "latest",
+    "yoshi-fedops-build-report": "~1.0.0",
+    "yoshi-maven-statics": "latest",
+    "yoshi-petri": "latest",
+    "yoshi-sass": "latest",
+    "yoshi-stylelint": "latest",
+    "yoshi-tslint": "latest",
+    "yoshi-typescript": "latest",
+    "yoshi-update-node-version": "latest",
+    "yoshi-wnpm-release": "latest"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -108,21 +122,7 @@
     "retry-promise": "~1.0.0",
     "shelljs": "~0.7.8",
     "typescript": "~2.3.0",
-    "wnpm-ci": "latest",
-    "yoshi-babel": "latest",
-    "yoshi-check-deps": "~1.0.0",
-    "yoshi-clean": "latest",
-    "yoshi-copy": "latest",
-    "yoshi-eslint": "latest",
-    "yoshi-fedops-build-report": "~1.0.0",
-    "yoshi-maven-statics": "latest",
-    "yoshi-petri": "latest",
-    "yoshi-sass": "latest",
-    "yoshi-stylelint": "latest",
-    "yoshi-tslint": "latest",
-    "yoshi-typescript": "latest",
-    "yoshi-update-node-version": "latest",
-    "yoshi-wnpm-release": "latest"
+    "wnpm-ci": "latest"
   },
   "eslintConfig": {
     "extends": "wix",
