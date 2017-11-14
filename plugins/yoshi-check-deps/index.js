@@ -6,7 +6,7 @@ const depkeeper = require('depkeeper');
 function checkDeps() {
   return depkeeper()
     .rule('yoshi', {major: 1})
-    .rule('yoshi', {major: 0, minor: 0, patch: 0})
+    .rule('{yoshi,wix-style-react}', {major: 0, minor: 0, patch: 0})
     .checkRules()
     .then(([outdated1, outdated2]) => {
       if (outdated1.length) {
@@ -19,7 +19,7 @@ function checkDeps() {
 
 function fail(deps) {
   const formatedDeps = deps.map(({name, version, minimal}) =>
-    chalk`${name}{redBright @${version}} must be {greenBright @${minimal}}`).join('\n');
+    chalk`${name}{redBright @${version}} must be at least {greenBright @${minimal}}`).join('\n');
   const message = chalk`{red ERROR: the following dependencies must be updated:\n}${formatedDeps}`;
   return Promise.reject(message);
 }
