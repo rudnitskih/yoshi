@@ -1,6 +1,7 @@
 {
   "name": "client-react-lazy-load",
   "version": "1.0.0",
+  "private": true,
   "homepage": "https://github.com/wix/yoshi/tree/master/examples/client-react-lazy-load",
   "author": {
     "name": "Roy Miloh",

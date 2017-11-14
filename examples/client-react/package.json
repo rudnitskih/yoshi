@@ -1,6 +1,7 @@
 {
   "name": "client-react-example",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "yoshi start --entry-point=./test/fakes/start-fake-server.js",
     "pretest": "yoshi lint && yoshi build",
