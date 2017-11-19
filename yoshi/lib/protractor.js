@@ -15,7 +15,7 @@ function checkWebdriver() {
       ['status']
     );
     webdriver.stdout.on('data', chunk => data += chunk.toString());
-    webdriver.once('close', () => data.includes('chromedriver version available') ? resolve() : reject());
+    webdriver.once('close', () => data.includes('chromedriver version available') ? reject() : resolve());
   });
 }
 
