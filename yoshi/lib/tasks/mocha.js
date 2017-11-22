@@ -3,7 +3,7 @@
 const spawn = require('cross-spawn');
 const projectConfig = require('../../config/project');
 const globs = require('../globs');
-const {inTeamCity} = require('../utils');
+const {getMochaReporter} = require('../utils');
 
 const pattern = projectConfig.specs.node() || globs.specs();
 
@@ -39,7 +39,6 @@ const runMocha = options => new Promise((resolve, reject) => {
   const args = toCliArgs(options);
 
   const baseEnv = {
-    mocha_reporter: inTeamCity() ? '' : 'progress', // eslint-disable-line camelcase
     NODE_ENV: 'test', SRC_PATH: './src'
   };
 
@@ -61,7 +60,7 @@ process.on('exit', () => {
 module.exports = ({log, watch}) => {
   function mocha() {
     const options = {
-      reporter: 'mocha-env-reporter',
+      reporter: getMochaReporter(),
       timeout: 30000,
       recursive: true,
       require: [require.resolve('../../config/test-setup')],

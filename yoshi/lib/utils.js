@@ -114,3 +114,15 @@ module.exports.shouldRunWebpack = webpackConfig => {
   const defaultEntryPath = path.join(webpackConfig.context, project.defaultEntry());
   return project.entry() || exists(`${defaultEntryPath}.{js,jsx,ts,tsx}`);
 };
+
+module.exports.getMochaReporter = () => {
+  if (process.env.mocha_reporter) {
+    return process.env.mocha_reporter;
+  }
+
+  if (module.exports.inTeamCity()) {
+    return 'mocha-teamcity-reporter';
+  }
+
+  return 'progress';
+};

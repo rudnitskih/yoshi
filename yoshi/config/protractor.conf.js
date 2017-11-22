@@ -1,7 +1,7 @@
 'use strict';
 
 const sass = require('node-sass');
-const {tryRequire} = require('../lib/utils');
+const {tryRequire, getMochaReporter} = require('../lib/utils');
 const {wixCssModulesRequireHook} = require('yoshi-runtime');
 
 //Private wix applitools key
@@ -85,7 +85,7 @@ const merged = ld.mergeWith({
 }, userConf, a => typeof a === 'function' ? a : undefined);
 
 if (merged.framework === 'mocha') {
-  merged.mochaOpts.reporter = 'mocha-env-reporter';
+  merged.mochaOpts.reporter = getMochaReporter();
 }
 
 function normaliseSpecs(config) {
