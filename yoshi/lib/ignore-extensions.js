@@ -41,3 +41,6 @@ require.extensions['.gif'] = mockMediaModules;
 
 require.extensions['.wav'] = mockMediaModules;
 require.extensions['.mp3'] = mockMediaModules;
+
+require.extensions['.mp4'] = mockMediaModules;
+require.extensions['.webm'] = mockMediaModules;

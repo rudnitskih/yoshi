@@ -317,17 +317,17 @@ describe('Aggregator: Test', () => {
       expect(res.stdout).to.contain('5 passing');
     });
 
-    it('should mock audio files to always return the file name', function () {
+    it('should mock audio and video files to always return the file name', function () {
       this.timeout(30000);
 
-      const extensions = ['wav', 'mp3'];
+      const extensions = ['wav', 'mp3', 'mp4', 'webm'];
       const setup = setupMediaFilesExtensions(extensions);
       const res = test
         .setup(setup)
         .execute('test', ['--mocha']);
 
       expect(res.code).to.equal(0);
-      expect(res.stdout).to.contain('2 passing');
+      expect(res.stdout).to.contain('4 passing');
     });
 
     it('should load graphql files', function () {

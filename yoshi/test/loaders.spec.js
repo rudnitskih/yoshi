@@ -518,18 +518,27 @@ describe('Loaders', () => {
       expect(content).to.contain(fileAboveTheLimit('font.eot'));
     });
 
-    it('should load wav and mp3 files', () => {
+    it('should load audio and video files', () => {
       test
         .setup({
-          'src/client.js': `require('./beep.wav');require('./beep.mp3');`,
+          'src/client.js': `
+            require('./beep.wav');
+            require('./beep.mp3');
+            require('./video.mp4');
+            require('./video.webm');
+          `,
           'src/beep.wav': createAboveTheLimitFile(),
           'src/beep.mp3': createAboveTheLimitFile(),
+          'src/video.mp4': createAboveTheLimitFile(),
+          'src/video.webm': createAboveTheLimitFile(),
         })
         .execute('build');
 
       const content = test.content('dist/statics/app.bundle.js');
       expect(content).to.contain(fileAboveTheLimit('beep.wav'));
       expect(content).to.contain(fileAboveTheLimit('beep.mp3'));
+      expect(content).to.contain(fileAboveTheLimit('video.mp4'));
+      expect(content).to.contain(fileAboveTheLimit('video.webm'));
     });
 
     it('should load files that have a path with query string', () => {

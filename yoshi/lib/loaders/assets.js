@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = () => ({
-  test: /^(?:(?!inline\.svg).)*\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|wav|mp3)(\?.*)?$/,
+  test: /^(?:(?!inline\.svg).)*\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|wav|mp3|mp4|webm)(\?.*)?$/,
   loader: 'url-loader',
   options: {
     name: '[path][name].[ext]?[hash]',
